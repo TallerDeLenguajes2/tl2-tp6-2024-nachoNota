@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "tl2-tp6-2024-nachoNota/1.0.0": {
+        "runtime": {
+          "tl2-tp6-2024-nachoNota.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "tl2-tp6-2024-nachoNota/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
