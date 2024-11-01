@@ -7,4 +7,8 @@
     <RootNamespace>tl2_tp6_2024_nachoNota</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SQLite" Version="8.0.10" />
+  </ItemGroup>
+
 </Project>
