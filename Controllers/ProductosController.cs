@@ -21,6 +21,21 @@ public class ProductosController : Controller
         return View(prodRep.listarProductos());
     }
 
+    [HttpGet]
+    public IActionResult Crear()
+    {
+        return View(new Producto());
+    }
+
+    [HttpPost]
+    public IActionResult Crear(Producto producto)
+    {
+        prodRep.Create(producto);
+        return RedirectToAction("Listar");
+    } 
+
+    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
