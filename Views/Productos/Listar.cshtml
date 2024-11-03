@@ -4,25 +4,28 @@
 
 @model List<Producto>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(Producto producto in Model)
-    {
+<a asp-action="Crear">Crear nuevo producto</a>
 
-            <tr>
-                <td>@producto.IdProducto</td>
-                <td>@producto.Descripcion</td>
-                <td>@producto.Precio</td>
-                <td><a asp-action="Modificar" asp-route-idProd="@producto.IdProducto">Modificar</a></td>
-            </tr>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Producto producto in Model)
+{
 
-    }
-        </tbody>
-    </table>
+        <tr>
+            <td>@producto.IdProducto</td>
+            <td>@producto.Descripcion</td>
+            <td>@producto.Precio</td>
+            <td><a asp-action="Modificar" asp-route-idProd="@producto.IdProducto">Modificar</a></td>
+            <td><a asp-action="Eliminar" asp-route-idProd="@producto.IdProducto">Eliminar</a></td>
+        </tr>
+
+}
+    </tbody>
+</table>

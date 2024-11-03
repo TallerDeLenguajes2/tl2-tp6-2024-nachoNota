@@ -56,6 +56,22 @@ public class ProductosController : Controller
         return RedirectToAction("Listar");
     }
 
+    [HttpGet]
+    public IActionResult Eliminar(int idProd)
+    {
+        var producto = prodRep.GetProducto(idProd);
+        return View(producto);
+    }
+
+    [HttpPost]
+    public IActionResult EliminarConfirm(int idProd)
+    {    
+        prodRep.delete(idProd);
+        return RedirectToAction("Listar");
+    }
+
+
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
