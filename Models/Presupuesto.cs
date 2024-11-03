@@ -7,7 +7,6 @@ public class Presupuesto
 
     public Presupuesto()
     {
-        fechaCreacion = DateTime.Now;
         detalle = new List<PresupuestoDetalle>();
     }
 

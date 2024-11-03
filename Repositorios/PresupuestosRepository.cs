@@ -2,7 +2,7 @@ using System.ComponentModel;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
-public class PresupuestoRepository
+public class PresupuestosRepository
 {
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
@@ -40,7 +40,7 @@ public class PresupuestoRepository
                 {
                     var presupuesto = new Presupuesto();
                     presupuesto.NombreDestinatario = reader["NombreDestinatario"].ToString();
-                    presupuesto.FechaCreacion = (DateTime)reader["FechaCreacion"];
+                    presupuesto.FechaCreacion = DateTime.Parse(reader["FechaCreacion"].ToString());
                     presupuesto.IdPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
                     listaPresupuestos.Add(presupuesto);
                 }
