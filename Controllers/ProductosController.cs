@@ -19,7 +19,6 @@ public class ProductosController : Controller
 
     public IActionResult Listar()
     {
-
         return View(prodRep.listarProductos());
     }
 
@@ -69,8 +68,6 @@ public class ProductosController : Controller
         prodRep.delete(idProd);
         return RedirectToAction("Listar");
     }
-
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

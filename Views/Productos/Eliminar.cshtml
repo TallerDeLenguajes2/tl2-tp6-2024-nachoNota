@@ -8,6 +8,7 @@
 
 <form class="row g-3" asp-controller="Productos" asp-action="EliminarConfirm">
     <input type="hidden" name="idProd" asp-for="@Model.IdProducto"> @{ /*para que mande el id, poner el name con el mismo nombre del parametro de EliminarConfirm*/}
+    
     <div class="col-12">
         <button type="submit" class="btn btn-outline-danger">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
