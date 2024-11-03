@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.RateLimiting;
 using tl2_tp6_2024_nachoNota.Models;
 
 namespace tl2_tp6_2024_nachoNota.Controllers;
@@ -34,7 +36,25 @@ public class ProductosController : Controller
         return RedirectToAction("Listar");
     } 
 
-    
+    [HttpGet]
+    public IActionResult Modificar(int idProd)
+    {
+        var producto = prodRep.GetProducto(idProd);
+        return View(producto);
+    }
+
+    [HttpPost]
+    public IActionResult Modificar(Producto productoView)
+    {
+        var producto = prodRep.GetProducto(productoView.IdProducto);
+
+        producto.Descripcion = productoView.Descripcion;
+        producto.Precio = productoView.Precio;
+
+        prodRep.Update(producto);
+
+        return RedirectToAction("Listar");
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

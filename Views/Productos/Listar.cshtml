@@ -17,10 +17,10 @@
     {
 
             <tr>
-                <th scope="row"></th>
                 <td>@producto.IdProducto</td>
                 <td>@producto.Descripcion</td>
                 <td>@producto.Precio</td>
+                <td><a asp-action="Modificar" asp-route-idProd="@producto.IdProducto">Modificar</a></td>
             </tr>
 
     }
