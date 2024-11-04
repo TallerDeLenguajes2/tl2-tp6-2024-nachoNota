@@ -23,6 +23,33 @@ public class PresupuestosController : Controller
         return View(presRep.GetPresupuestos());
     }
 
+    [HttpGet]
+    public IActionResult Crear()
+    {
+        return View(new Presupuesto());
+    }
+
+    [HttpPost]
+    public IActionResult Crear(Presupuesto presupuesto)
+    {
+        presRep.create(presupuesto);
+        return RedirectToAction("Listar");
+    }
+
+    [HttpGet]
+    public IActionResult Eliminar(int id)
+    {
+        var presupuesto = presRep.GetPresupuesto(id);
+        return View(presupuesto);
+    }
+
+    [HttpPost]
+    public IActionResult EliminarConfirm(int id)
+    {
+        presRep.delete(id);
+        return RedirectToAction("Listar");
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

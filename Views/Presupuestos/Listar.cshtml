@@ -4,6 +4,7 @@
 
 @model List<Presupuesto>
 
+<a asp-action="Crear" class="text-decoration-none">Crear nuevo presupuesto</a>
 
 <table class="table mt-3">
     <thead>
@@ -11,6 +12,7 @@
             <th scope="col">ID</th>
             <th scope="col">Destinatario</th>
             <th scope="col">Fecha de Creación</th>
+            <th scope="col"></th>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
         </tr>
@@ -24,6 +26,7 @@
                 <td rowspan="@cant">@presupuesto.Id</td>
                 <td rowspan="@cant">@presupuesto.NombreDestinatario</td>
                 <td rowspan="@cant">@presupuesto.FechaCreacion.ToString("dd/MM/yyyy")</td>
+                <td rowspan="@cant"><a asp-action="Eliminar" asp-route-id="@presupuesto.Id" class="text-decoration-none">Eliminar</a></td>
                 @foreach (var detalle in presupuesto.Detalle)
                     {
                         <tr>
