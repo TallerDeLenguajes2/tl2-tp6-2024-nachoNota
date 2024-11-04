@@ -18,7 +18,7 @@ public class ProductosRepository{
                 while(reader.Read())
                 {
                     var producto = new Producto();
-                    producto.IdProducto = Convert.ToInt32(reader["idProducto"]);
+                    producto.Id = Convert.ToInt32(reader["idProducto"]);
                     producto.Descripcion = reader["Descripcion"].ToString();
                     producto.Precio = Convert.ToInt32(reader["Precio"]);
                     productos.Add(producto);
@@ -46,7 +46,7 @@ public class ProductosRepository{
             {
                 while (reader.Read())
                 {
-                    producto.IdProducto = Convert.ToInt32(reader["idProducto"]);
+                    producto.Id = Convert.ToInt32(reader["idProducto"]);
                     producto.Descripcion = reader["Descripcion"].ToString();
                     producto.Precio = Convert.ToInt32(reader["Precio"]);
                 }
@@ -85,7 +85,7 @@ public class ProductosRepository{
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
-            command.Parameters.Add(new SqliteParameter("@idProducto", producto.IdProducto));
+            command.Parameters.Add(new SqliteParameter("@idProducto", producto.Id));
             command.Parameters.Add(new SqliteParameter("@Descripcion", producto.Descripcion));
             command.Parameters.Add(new SqliteParameter("@Precio", producto.Precio));
 

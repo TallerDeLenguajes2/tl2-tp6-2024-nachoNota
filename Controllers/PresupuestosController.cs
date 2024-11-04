@@ -17,6 +17,12 @@ public class PresupuestosController : Controller
         presRep = new PresupuestosRepository();
     }
 
+    [HttpGet]
+    public IActionResult Listar()
+    {
+        return View(presRep.GetPresupuestos());
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

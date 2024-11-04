@@ -45,7 +45,7 @@ public class ProductosController : Controller
     [HttpPost]
     public IActionResult Modificar(Producto productoView)
     {
-        var producto = prodRep.GetProducto(productoView.IdProducto);
+        var producto = prodRep.GetProducto(productoView.Id);
 
         producto.Descripcion = productoView.Descripcion;
         producto.Precio = productoView.Precio;

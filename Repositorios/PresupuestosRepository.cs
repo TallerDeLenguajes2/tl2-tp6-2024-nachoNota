@@ -24,7 +24,7 @@ public class PresupuestosRepository
         }
     }
 
-    public List<Presupuesto> listarPresupuestos()
+    public List<Presupuesto> GetPresupuestos()
     {
         var querystring = "SELECT * FROM Presupuestos";
         var listaPresupuestos = new List<Presupuesto>();
@@ -39,9 +39,12 @@ public class PresupuestosRepository
                 while(reader.Read())
                 {
                     var presupuesto = new Presupuesto();
+                    
                     presupuesto.NombreDestinatario = reader["NombreDestinatario"].ToString();
                     presupuesto.FechaCreacion = DateTime.Parse(reader["FechaCreacion"].ToString());
-                    presupuesto.IdPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
+                    presupuesto.Id = Convert.ToInt32(reader["idPresupuesto"]);
+                    
+                    presupuesto.añadirDetalle(GetDetalles(presupuesto.Id));
                     listaPresupuestos.Add(presupuesto);
                 }
             }
@@ -51,10 +54,10 @@ public class PresupuestosRepository
         return listaPresupuestos;
     }
 
-    public Presupuesto GetDetalles(int id)
+    public List<PresupuestoDetalle> GetDetalles(int id)
     {
         var querystring = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto = @idPresupuesto";
-        var presupuesto = new Presupuesto();
+        var detalles = new List<PresupuestoDetalle>();
 
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
@@ -69,11 +72,11 @@ public class PresupuestosRepository
                     var detalle = new PresupuestoDetalle();
                     detalle.asignarProd(Convert.ToInt32(reader["idProducto"]));
                     detalle.Cantidad = Convert.ToInt32(reader["Cantidad"]);
-                    presupuesto.añadirDetalle(detalle);
+                    detalles.Add(detalle);
                 }
             }
         }
-        return presupuesto;
+        return detalles;
     }
 
     public void agregarDetalle(PresupuestoDetalle detalle, int idPresupuesto)
@@ -87,14 +90,13 @@ public class PresupuestosRepository
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
             command.Parameters.Add(new SqliteParameter("@idPresupuesto", idPresupuesto));
-            command.Parameters.Add(new SqliteParameter("@idProducto", detalle.Producto.IdProducto));
+            command.Parameters.Add(new SqliteParameter("@idProducto", detalle.Producto.Id));
             command.Parameters.Add(new SqliteParameter("@Cantidad", detalle.Cantidad));
 
             command.ExecuteNonQuery();
 
             connection.Close();
         }
-
     }
 
     public void delete(int id)

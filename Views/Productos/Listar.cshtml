@@ -4,9 +4,9 @@
 
 @model List<Producto>
 
-<a asp-action="Crear">Crear nuevo producto</a>
+<a asp-action="Crear" class="text-decoration-none">Crear nuevo producto</a>
 
-<table class="table mt-3">
+<table class="table mt-3 table-hover">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -19,11 +19,11 @@
 {
 
         <tr>
-            <td>@producto.IdProducto</td>
+            <td>@producto.Id</td>
             <td>@producto.Descripcion</td>
             <td>@producto.Precio</td>
-            <td><a asp-action="Modificar" asp-route-idProd="@producto.IdProducto">Modificar</a></td>
-            <td><a asp-action="Eliminar" asp-route-idProd="@producto.IdProducto">Eliminar</a></td>
+            <td><a asp-action="Modificar" asp-route-idProd="@producto.Id" class="text-decoration-none">Modificar</a></td>
+            <td><a asp-action="Eliminar" asp-route-idProd="@producto.Id" class="text-decoration-none">Eliminar</a></td>
         </tr>
 
 }

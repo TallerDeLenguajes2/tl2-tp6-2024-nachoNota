@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Listado presupuestos";
+}
+
+@model List<Presupuesto>
+
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Destinatario</th>
+            <th scope="col">Fecha de Creación</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var presupuesto in Model)
+        {
+            int cant = presupuesto.Detalle.Count + 1;
+            <tr>
+            
+                <td rowspan="@cant">@presupuesto.Id</td>
+                <td rowspan="@cant">@presupuesto.NombreDestinatario</td>
+                <td rowspan="@cant">@presupuesto.FechaCreacion.ToString("dd/MM/yyyy")</td>
+                @foreach (var detalle in presupuesto.Detalle)
+                    {
+                        <tr>
+                            <td>@detalle.Producto.Descripcion</td>
+                            <td>@detalle.Cantidad</td>
+                        </tr>
+                    }
+            </tr>
+        }
+    </tbody>
+</table>
