@@ -52,6 +52,25 @@ public class PresupuestosController : Controller
     }
 
     [HttpGet]
+    public IActionResult Modificar(int id)
+    {
+        var presupuesto = presRep.GetPresupuesto(id);
+        return View(presupuesto);
+    }
+
+    [HttpPost]
+    public IActionResult Modificar(Presupuesto presupuestoVista)
+    {
+        var presupuesto = presRep.GetPresupuesto(presupuestoVista.Id);
+
+        presupuesto.NombreDestinatario = presupuestoVista.NombreDestinatario;
+        presupuesto.FechaCreacion = presupuestoVista.FechaCreacion;
+        presRep.modificar(presupuesto);
+
+        return RedirectToAction("Listar");
+    }
+
+    [HttpGet]
     public IActionResult Eliminar(int id)
     {
         var presupuesto = presRep.GetPresupuesto(id);

@@ -105,6 +105,24 @@ public class PresupuestosRepository
         return presupuesto;
     }
 
+    public void modificar(Presupuesto presupuesto)
+    {
+        string querystring = "UPDATE Presupuestos SET NombreDestinatario = @destinatario, FechaCreacion = @fecha WHERE idPresupuesto = @id";
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+
+            command.Parameters.Add(new SqliteParameter("@id", presupuesto.Id));
+            command.Parameters.Add(new SqliteParameter("@destinatario", presupuesto.NombreDestinatario));
+            command.Parameters.Add(new SqliteParameter("@fecha", presupuesto.FechaCreacion));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+
     public void agregarDetalle(PresupuestoDetalle detalle, int idPresupuesto)
     {
         var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
