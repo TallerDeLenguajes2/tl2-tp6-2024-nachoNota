@@ -1,4 +1,6 @@
-    public class PresupuestoDetalle
+using System.ComponentModel.DataAnnotations;
+
+public class PresupuestoDetalle
     {
         private Producto producto;
         private int cantidad;

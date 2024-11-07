@@ -32,7 +32,22 @@ public class PresupuestosController : Controller
     [HttpPost]
     public IActionResult Crear(Presupuesto presupuesto)
     {
+        presupuesto.FechaCreacion = DateTime.Now;
         presRep.create(presupuesto);
+        return RedirectToAction("Listar");
+    }
+
+    [HttpGet]
+    public IActionResult AsignarProducto(int id)
+    {
+        var presupuesto = presRep.GetPresupuesto(id);
+        return View(presupuesto);
+    }
+
+    [HttpPost]
+    public IActionResult AsignarProducto(int id, int idProducto, int cantidad)
+    {   
+        presRep.agregarDetalle(id, idProducto, cantidad);
         return RedirectToAction("Listar");
     }
 
@@ -49,7 +64,6 @@ public class PresupuestosController : Controller
         presRep.delete(id);
         return RedirectToAction("Listar");
     }
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

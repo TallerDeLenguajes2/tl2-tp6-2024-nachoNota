@@ -15,6 +15,32 @@ public class Presupuesto
     public DateTime FechaCreacion { get => fechaCreacion; set => fechaCreacion = value; }
     public List<PresupuestoDetalle> Detalle { get => detalle; }
 
+    public int MontoPresupuesto()
+    {
+        int monto = 0;
+        foreach(var det in Detalle)
+        {
+            monto += det.Cantidad * det.Producto.Precio;
+        }
+        return monto;
+    }
+
+    public double MontoPresupuestoConIVA()
+    {
+        return MontoPresupuesto() * 1.21;
+    }
+
+    public int CantidadProductos()
+    {
+        int cant = 0;
+        foreach(var det in detalle)
+        {
+            cant += det.Cantidad;
+        }
+
+        return cant;
+    }
+
     public void añadirDetalle(PresupuestoDetalle detalle)
     {
         Detalle.Add(detalle);

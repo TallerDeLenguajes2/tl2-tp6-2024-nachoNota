@@ -125,6 +125,26 @@ public class PresupuestosRepository
         }
     }
 
+    public void agregarDetalle(int idPresupuesto, int idProducto, int cantidad)
+    {
+        var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
+
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+
+            command.Parameters.Add(new SqliteParameter("@idPresupuesto", idPresupuesto));
+            command.Parameters.Add(new SqliteParameter("@idProducto", idProducto));
+            command.Parameters.Add(new SqliteParameter("@Cantidad", cantidad));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+
     public void delete(int id)
     {
         var querystring = "DELETE FROM Presupuestos WHERE idPresupuesto = @idPresupuesto";

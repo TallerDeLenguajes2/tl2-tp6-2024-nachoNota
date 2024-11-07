@@ -13,6 +13,7 @@
             <th scope="col">Destinatario</th>
             <th scope="col">Fecha de Creación</th>
             <th scope="col"></th>
+            <th scope="col"></th>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
         </tr>
@@ -27,6 +28,7 @@
                 <td rowspan="@cant">@presupuesto.NombreDestinatario</td>
                 <td rowspan="@cant">@presupuesto.FechaCreacion.ToString("dd/MM/yyyy")</td>
                 <td rowspan="@cant"><a asp-action="Eliminar" asp-route-id="@presupuesto.Id" class="text-decoration-none">Eliminar</a></td>
+                <td rowspan="@cant"><a asp-action="AsignarProducto" asp-route-id="@presupuesto.Id" class="text-decoration-none">Asignar producto</a></td>
                 @foreach (var detalle in presupuesto.Detalle)
                     {
                         <tr>

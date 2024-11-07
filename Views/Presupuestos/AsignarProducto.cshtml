@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Asignar producto a presupuesto";
+}
+
+@model Presupuesto
+
+<form class="row g-3" asp-controller="Presupuestos" asp-action="AsignarProducto">
+    <p>Id del Presupuesto en la vista: @Model.Id</p>
+
+    <input type="hidden" name="idPresupuesto" asp-for="@Model.Id" />
+    <div class="col-md-3">
+        <label for="idProducto" class="form-label">Id producto</label>
+        <input type="text" name="idProducto" id="idProducto" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="text" name="cantidad" id="cantidad" class="form-control">
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+            </svg>
+            Asignar producto
+        </button>
+    </div>
+</form>
