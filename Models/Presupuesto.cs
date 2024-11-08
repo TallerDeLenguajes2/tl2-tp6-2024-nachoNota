@@ -1,9 +1,9 @@
 public class Presupuesto
 {
     private int id;
-    private string nombreDestinatario;
     private DateTime fechaCreacion;
     private List<PresupuestoDetalle> detalle;
+    private Cliente cliente;
 
     public Presupuesto()
     {
@@ -11,8 +11,8 @@ public class Presupuesto
     }
 
     public int Id { get => id; set => id = value; }
-    public string NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
     public DateTime FechaCreacion { get => fechaCreacion; set => fechaCreacion = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
     public List<PresupuestoDetalle> Detalle { get => detalle; }
 
     public int MontoPresupuesto()

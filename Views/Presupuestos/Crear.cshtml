@@ -6,8 +6,8 @@
 
 <form class="row g-3" asp-controller="Presupuestos" asp-action="Crear">
     <div class="col-md-3">
-        <label asp-for="@Model.NombreDestinatario" class="form-label">Nombre destinatario</label>
-        <input type="text" class="form-control" asp-for="@Model.NombreDestinatario">
+        <label asp-for="@Model.Cliente.Nombre" class="form-label">Nombre destinatario</label>
+        <input type="text" class="form-control" asp-for="@Model.Cliente.Nombre">
     </div>
 
     

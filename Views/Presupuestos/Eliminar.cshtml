@@ -22,7 +22,7 @@
         }
         <tr>
             <td rowspan="@cant">@Model.Id</td>
-            <td rowspan="@cant">@Model.NombreDestinatario</td>
+            <td rowspan="@cant">@Model.Cliente.Nombre</td>
             <td rowspan="@cant">@Model.FechaCreacion.ToString("dd/MM/yyyy")</td>
             @foreach (var detalle in Model.Detalle)
             {

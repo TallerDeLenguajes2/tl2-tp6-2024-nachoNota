@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+@model List<Cliente>
+
+<a asp-action="Crear" class="text-decoration-none">Crear nuevo Cliente</a>
+
+<table class="table mt-3 table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Cliente cliente in Model)
+{
+
+        <tr>
+            <td>@cliente.IdCliente</td>
+            <td>@cliente.Nombre</td>
+            <td>@cliente.Email</td>
+            <td>@cliente.Telefono</td>
+            <td><a asp-action="Modificar" asp-route-idCli="@cliente.IdCliente" class="text-decoration-none">Modificar</a></td>
+            <td><a asp-action="Eliminar" asp-route-idCli="@cliente.IdCliente" class="text-decoration-none">Eliminar</a></td>
+
+         </tr>
+
+}
+    </tbody>
+</table>
