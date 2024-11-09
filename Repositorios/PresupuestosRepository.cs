@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
@@ -46,8 +47,7 @@ public class PresupuestosRepository
                     presupuesto.Cliente.Telefono = reader["Telefono"].ToString();
                     presupuesto.FechaCreacion = DateTime.Parse(reader["FechaCreacion"].ToString());
                     presupuesto.Id = Convert.ToInt32(reader["idPresupuesto"]);
-                    
-                    presupuesto.añadirDetalle(GetDetalles(presupuesto.Id));
+
                     listaPresupuestos.Add(presupuesto);
                 }
             }
@@ -57,23 +57,27 @@ public class PresupuestosRepository
         return listaPresupuestos;
     }
 
+
+
     public List<PresupuestoDetalle> GetDetalles(int id)
     {
-        var querystring = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto = @idPresupuesto";
+        var querystring = "SELECT idProducto, Descripcion, Precio, Cantidad FROM PresupuestosDetalle JOIN Productos USING(idProducto) WHERE idPresupuesto = @id";
         var detalles = new List<PresupuestoDetalle>();
 
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
-            command.Parameters.Add(new SqliteParameter("@idPresupuesto", id));
+            command.Parameters.Add(new SqliteParameter("@id", id));
 
             using(SqliteDataReader reader = command.ExecuteReader())
             {
                 while(reader.Read())
                 {
                     var detalle = new PresupuestoDetalle();
-                    detalle.asignarProd(Convert.ToInt32(reader["idProducto"]));
+                    detalle.Producto.Id = Convert.ToInt32(reader["idProducto"]);
+                    detalle.Producto.Descripcion = reader["Descripcion"].ToString();
+                    detalle.Producto.Precio = Convert.ToInt32(reader["Precio"]);
                     detalle.Cantidad = Convert.ToInt32(reader["Cantidad"]);
                     detalles.Add(detalle);
                 }
@@ -84,7 +88,7 @@ public class PresupuestosRepository
 
     public Presupuesto GetPresupuesto(int id)
     {
-        string querystring = "SELECT * FROM Presupuestos WHERE idPresupuesto = @id";
+        string querystring = "SELECT idPresupuesto, idCliente, Nombre, FechaCreacion FROM Presupuestos JOIN Cliente USING(idCliente) WHERE idPresupuesto = @id";
         var presupuesto = new Presupuesto();
 
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
@@ -98,9 +102,9 @@ public class PresupuestosRepository
                 while(reader.Read())
                 {
                     presupuesto.Id = Convert.ToInt32(reader["idPresupuesto"]);
-                    presupuesto.Cliente.Nombre = reader["NombreDestinatario"].ToString();
+                    presupuesto.Cliente.IdCliente = Convert.ToInt32(reader["idCliente"]);
+                    presupuesto.Cliente.Nombre = reader["Nombre"].ToString();
                     presupuesto.FechaCreacion = DateTime.Parse(reader["FechaCreacion"].ToString());
-                    presupuesto.añadirDetalle(GetDetalles(presupuesto.Id));
                 }
             }
             connection.Close();
@@ -177,6 +181,24 @@ public class PresupuestosRepository
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
             command.Parameters.Add(new SqliteParameter("@idPresupuesto", id));
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+
+    public void deleteDetalle(int idPres, int idProd)
+    {
+        var querystring = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPres AND idProducto = @idProd";
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+
+            command.Parameters.Add(new SqliteParameter("@idPres", idPres));
+            command.Parameters.Add(new SqliteParameter("@idProd", idProd));
+
             command.ExecuteNonQuery();
 
             connection.Close();

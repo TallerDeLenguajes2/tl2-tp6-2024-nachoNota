@@ -12,25 +12,13 @@
             <th scope="col">ID</th>
             <th scope="col">Destinatario</th>
             <th scope="col">Fecha de Creación</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Cantidad</th>
         </tr>
     </thead>
     <tbody>
-        @{
-            int cant = Model.Detalle.Count + 1;
-        }
         <tr>
-            <td rowspan="@cant">@Model.Id</td>
-            <td rowspan="@cant">@Model.Cliente.Nombre</td>
-            <td rowspan="@cant">@Model.FechaCreacion.ToString("dd/MM/yyyy")</td>
-            @foreach (var detalle in Model.Detalle)
-            {
-                <tr>
-                    <td>@detalle.Producto.Descripcion</td>
-                    <td>@detalle.Cantidad</td>
-                </tr>
-            }
+            <td>@Model.Id</td>
+            <td>@Model.Cliente.Nombre</td>
+            <td>@Model.FechaCreacion.ToString("dd/MM/yyyy")</td>
         </tr>
     </tbody>
 </table>

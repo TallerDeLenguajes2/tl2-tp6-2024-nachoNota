@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alumno\\Downloads\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj": {}
+    "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alumno\\Downloads\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj": {
+    "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alumno\\Downloads\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj",
+        "projectUniqueName": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj",
         "projectName": "tl2-tp6-2024-nachoNota",
-        "projectPath": "C:\\Users\\Alumno\\Downloads\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj",
-        "packagesPath": "C:\\Users\\Alumno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alumno\\Downloads\\tl2-tp6-2024-nachoNota\\obj\\",
+        "projectPath": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj",
+        "packagesPath": "C:\\Users\\Ignacio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Alumno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ignacio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

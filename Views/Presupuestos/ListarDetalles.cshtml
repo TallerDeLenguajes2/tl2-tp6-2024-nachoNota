@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Listado detalles";
+}
+
+@model List<PresupuestoDetalle>;
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col">Id producto</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detalle in Model)
+        {
+            <tr>
+                <td>@detalle.Producto.Id</td>
+                <td>@detalle.Producto.Descripcion</td>
+                <td>@detalle.Producto.Precio</td>
+                <td>@detalle.Cantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>

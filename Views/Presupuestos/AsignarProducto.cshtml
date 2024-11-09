@@ -5,7 +5,6 @@
 @model Presupuesto
 
 <form class="row g-3" asp-controller="Presupuestos" asp-action="AsignarProducto">
-    <p>Id del Presupuesto en la vista: @Model.Id</p>
 
     <input type="hidden" name="idPresupuesto" asp-for="@Model.Id" />
     <div class="col-md-3">

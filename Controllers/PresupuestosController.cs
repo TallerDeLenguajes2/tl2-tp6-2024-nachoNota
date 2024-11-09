@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.RateLimiting;
@@ -21,6 +22,12 @@ public class PresupuestosController : Controller
     public IActionResult Listar()
     {
         return View(presRep.GetPresupuestos());
+    }
+
+    [HttpGet]
+    public IActionResult ListarDetalles(int id)
+    {
+        return View(presRep.GetDetalles(id));
     }
 
     [HttpGet]
@@ -83,7 +90,7 @@ public class PresupuestosController : Controller
         presRep.delete(id);
         return RedirectToAction("Listar");
     }
-
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
