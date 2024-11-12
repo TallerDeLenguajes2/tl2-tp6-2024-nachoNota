@@ -2,15 +2,18 @@
     ViewData["Title"] = "Asignar producto a presupuesto";
 }
 
-@model Presupuesto
+@model ProductoAltaViewModel
 
 <form class="row g-3" asp-controller="Presupuestos" asp-action="AsignarProducto">
 
-    <input type="hidden" name="idPresupuesto" asp-for="@Model.Id" />
-    <div class="col-md-3">
-        <label for="idProducto" class="form-label">Id producto</label>
-        <input type="text" name="idProducto" id="idProducto" class="form-control">
-    </div>
+    <input type="hidden" name="idPresupuesto" asp-for="@Model.IdPresupuesto" />
+
+    <select class="form-select" aria-label="Default select example" name="idProducto">  
+    @foreach(var producto in Model.Productos)
+    {
+        <option value="@producto.Id">@producto.Descripcion</option>
+    }
+    </select>
 
     <div class="col-md-3">
         <label for="cantidad" class="form-label">Cantidad</label>

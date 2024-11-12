@@ -53,7 +53,16 @@ public class PresupuestosController : Controller
     public IActionResult AsignarProducto(int id)
     {
         var presupuesto = presRep.GetPresupuesto(id);
-        return View(presupuesto);
+        if(presupuesto is null)
+        {
+            return RedirectToAction("Listar");
+        } else 
+        {
+            var prodRep = new ProductosRepository();
+            var presupuestoVM = new ProductoAltaViewModel(id, prodRep.listarProductos());
+            return View(presupuestoVM);
+        }
+    
     }
 
     [HttpPost]
