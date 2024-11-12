@@ -33,13 +33,18 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult Crear()
     {
-        return View(new Presupuesto());
+        var cliRep = new ClienteRepository();
+
+        return View(new PresupuestoViewModel(cliRep.getClientes()));
     }
 
     [HttpPost]
-    public IActionResult Crear(Presupuesto presupuesto)
+    public IActionResult Crear(int IdCliente)
     {
+        var presupuesto = new Presupuesto();
         presupuesto.FechaCreacion = DateTime.Now;
+        presupuesto.Cliente.AsignarId(IdCliente);
+        
         presRep.create(presupuesto);
         return RedirectToAction("Listar");
     }

@@ -1,4 +1,6 @@
-public class Cliente
+using System.ComponentModel.DataAnnotations;
+
+public class ClienteViewModel
 {
     private int idCliente;
     private string nombre;
@@ -6,20 +8,27 @@ public class Cliente
     private string telefono;
 
     public int IdCliente { get => idCliente; set => idCliente = value; }
+    
+    [Required]
     public string Nombre { get => nombre; set => nombre = value; }
+    
+    [EmailAddress]
     public string Email { get => email; set => email = value; }
+    
+    [Phone]
     public string Telefono { get => telefono; set => telefono = value; }
 
-    public Cliente()
+    public ClienteViewModel()
     {
+
     }
 
-    public Cliente(ClienteViewModel clientevw)
+    public ClienteViewModel(Cliente cliente)
     {
-        idCliente = clientevw.IdCliente;
-        nombre = clientevw.Nombre;
-        email = clientevw.Email;
-        telefono = clientevw.Telefono;
+        idCliente = cliente.IdCliente;
+        nombre = cliente.Nombre;
+        email = cliente.Email;
+        telefono = cliente.Telefono;
     }
 
     public void AsignarId(int id)

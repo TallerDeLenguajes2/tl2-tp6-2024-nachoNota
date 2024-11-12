@@ -4,7 +4,7 @@ public class ClienteRepository
 {
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
-    public List<Cliente> listarProductos()
+    public List<Cliente> getClientes()
     {
         var querystring = @"SELECT * FROM Cliente";
         List<Cliente> clientes = new List<Cliente>();

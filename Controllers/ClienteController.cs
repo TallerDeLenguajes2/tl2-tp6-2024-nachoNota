@@ -19,7 +19,7 @@ public class ClienteController : Controller
 
     public IActionResult Listar()
     {
-        return View(cliRep.listarProductos());
+        return View(cliRep.getClientes());
     }
 
     [HttpGet]
@@ -39,18 +39,16 @@ public class ClienteController : Controller
     public IActionResult Modificar(int idCli)
     {
         var cliente = cliRep.GetCliente(idCli);
-        return View(cliente);
+        return View(new ClienteViewModel(cliente));
     }
 
     [HttpPost]
-    public IActionResult Modificar(Cliente clienteView)
+    public IActionResult Modificar(ClienteViewModel clienteView)
     {
-        var cliente = cliRep.GetCliente(clienteView.IdCliente);
 
-        cliente.Nombre = clienteView.Nombre;
-        cliente.Email = clienteView.Email;
-        cliente.Telefono = clienteView.Telefono;
+        if(!ModelState.IsValid) return RedirectToAction("Listar");
 
+        var cliente = new Cliente(clienteView);
         cliRep.Update(cliente);
 
         return RedirectToAction("Listar");

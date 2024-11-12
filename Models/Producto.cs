@@ -6,4 +6,15 @@ public class Producto{
     public int Id { get => id; set => id = value; }
     public string Descripcion { get => descripcion; set => descripcion = value; }
     public int Precio { get => precio; set => precio = value; }
+
+    public Producto()
+    {
+
+    }
+    public Producto(ProductoViewModel prodvw)
+    {
+        id = prodvw.Id;
+        descripcion = prodvw.Descripcion;
+        precio = prodvw.Precio;
+    }
 }

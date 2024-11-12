@@ -39,19 +39,18 @@ public class ProductosController : Controller
     public IActionResult Modificar(int idProd)
     {
         var producto = prodRep.GetProducto(idProd);
-        return View(producto);
+        return View(new ProductoViewModel(producto));
     }
 
     [HttpPost]
-    public IActionResult Modificar(Producto productoView)
+    public IActionResult Modificar(ProductoViewModel productoView)
     {
-        var producto = prodRep.GetProducto(productoView.Id);
 
-        producto.Descripcion = productoView.Descripcion;
-        producto.Precio = productoView.Precio;
+        if(!ModelState.IsValid) return RedirectToAction("Listar");
 
+        var producto = new Producto(productoView);
         prodRep.Update(producto);
-
+        
         return RedirectToAction("Listar");
     }
 
