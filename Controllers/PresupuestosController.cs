@@ -66,9 +66,9 @@ public class PresupuestosController : Controller
     }
 
     [HttpPost]
-    public IActionResult AsignarProducto(int id, int idProducto, int cantidad)
+    public IActionResult AsignarProducto(int idPresupuesto, int idProducto, int cantidad)
     {   
-        presRep.agregarDetalle(id, idProducto, cantidad);
+        presRep.agregarDetalle(idPresupuesto, idProducto, cantidad);
         return RedirectToAction("Listar");
     }
 
