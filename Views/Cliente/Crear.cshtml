@@ -2,7 +2,8 @@
     ViewData["Title"] = "Crear cliente";
 }
 
-@model Cliente
+@model ClienteViewModel
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}
 
 <form class="row g-3" asp-controller="Cliente" asp-action="Crear">
     <div class="col-md-3">

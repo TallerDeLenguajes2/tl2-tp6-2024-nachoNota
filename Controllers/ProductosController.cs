@@ -25,12 +25,15 @@ public class ProductosController : Controller
     [HttpGet]
     public IActionResult Crear()
     {
-        return View(new Producto());
+        return View(new ProductoViewModel());
     }
 
     [HttpPost]
-    public IActionResult Crear(Producto producto)
+    public IActionResult Crear(ProductoViewModel productoVM)
     {
+        if(!ModelState.IsValid) return RedirectToAction("Listar");
+
+        var producto = new Producto(productoVM);
         prodRep.Create(producto);
         return RedirectToAction("Listar");
     } 

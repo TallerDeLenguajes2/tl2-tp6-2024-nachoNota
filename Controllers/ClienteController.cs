@@ -25,12 +25,15 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult Crear()
     {
-        return View(new Cliente());
+        return View(new ClienteViewModel());
     }
 
     [HttpPost]
-    public IActionResult Crear(Cliente cliente)
+    public IActionResult Crear(ClienteViewModel clienteVM)
     {
+        if(!ModelState.IsValid) return RedirectToAction("Listar");
+
+        var cliente = new Cliente(clienteVM); 
         cliRep.Create(cliente);
         return RedirectToAction("Listar");
     } 
