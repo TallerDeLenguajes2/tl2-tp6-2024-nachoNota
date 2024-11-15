@@ -1,9 +1,9 @@
 using Microsoft.Data.Sqlite;
 
-public class ProductosRepository{
+public class ProductosRepository : IProductosRepository{
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
-    public List<Producto> listarProductos()
+    public List<Producto> GetAll()
     {
         var querystring = @"SELECT * FROM Productos";
         List<Producto> productos = new List<Producto>();
@@ -30,7 +30,7 @@ public class ProductosRepository{
         return productos;
     }
 
-    public Producto GetProducto(int id)
+    public Producto GetById(int id)
     {
         var querystring = "SELECT * FROM Productos WHERE idProducto = @idProducto";
         var producto = new Producto();
@@ -95,8 +95,9 @@ public class ProductosRepository{
         }
     }
 
-    public void delete(int id)
+    public void Delete(int id)
     {
+        DeleteDetalleCompleto(id);
         var querystring = "DELETE FROM Productos WHERE idProducto = @idProducto";
 
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion)){
@@ -104,6 +105,23 @@ public class ProductosRepository{
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
             command.Parameters.Add(new SqliteParameter("@idProducto", id));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+
+    public void DeleteDetalleCompleto(int idProd)
+    {
+        var querystring = "DELETE FROM PresupuestosDetalle WHERE idProducto = @idProd";
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+
+            command.Parameters.Add(new SqliteParameter("@idProd", idProd));
 
             command.ExecuteNonQuery();
 

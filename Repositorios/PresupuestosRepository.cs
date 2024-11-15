@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
-public class PresupuestosRepository
+public class PresupuestosRepository : IPresupuestosRepository
 {
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
-    public void create(Presupuesto presupuesto)
+    public void Create(Presupuesto presupuesto)
     {
         var querystring = "INSERT INTO Presupuestos (idCliente, FechaCreacion) VALUES (@id, @fecha)";
 
@@ -59,7 +59,7 @@ public class PresupuestosRepository
 
 
 
-    public List<PresupuestoDetalle> GetDetalles(int id)
+    public List<PresupuestoDetalle> GetDetallesById(int id)
     {
         var querystring = "SELECT idProducto, Descripcion, Precio, Cantidad FROM PresupuestosDetalle JOIN Productos USING(idProducto) WHERE idPresupuesto = @id";
         var detalles = new List<PresupuestoDetalle>();
@@ -86,7 +86,7 @@ public class PresupuestosRepository
         return detalles;
     }
 
-    public Presupuesto GetPresupuesto(int id)
+    public Presupuesto GetById(int id)
     {
         string querystring = "SELECT idPresupuesto, idCliente, Nombre, FechaCreacion FROM Presupuestos JOIN Cliente USING(idCliente) WHERE idPresupuesto = @id";
         var presupuesto = new Presupuesto();
@@ -112,7 +112,7 @@ public class PresupuestosRepository
         return presupuesto;
     }
 
-    public void modificar(Presupuesto presupuesto)
+    public void Update(Presupuesto presupuesto)
     {
         string querystring = "UPDATE Presupuestos SET idCliente = @idCli, FechaCreacion = @fecha WHERE idPresupuesto = @id";
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
@@ -130,7 +130,7 @@ public class PresupuestosRepository
         }
     }
 
-    public void agregarDetalle(PresupuestoDetalle detalle, int idPresupuesto)
+    public void AddDetalle(PresupuestoDetalle detalle, int idPresupuesto)
     {
         var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
 
@@ -150,7 +150,7 @@ public class PresupuestosRepository
         }
     }
 
-    public void agregarDetalle(int idPresupuesto, int idProducto, int cantidad)
+    public void AddDetalle(int idPresupuesto, int idProducto, int cantidad)
     {
         var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
 
@@ -170,8 +170,9 @@ public class PresupuestosRepository
         }
     }
 
-    public void delete(int id)
+    public void Delete(int id)
     {
+        DeleteDetalleCompleto(id);
         var querystring = "DELETE FROM Presupuestos WHERE idPresupuesto = @idPresupuesto";
 
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
@@ -187,7 +188,7 @@ public class PresupuestosRepository
         }
     }
 
-    public void deleteDetalle(int idPres, int idProd)
+    public void DeleteDetalle(int idPres, int idProd)
     {
         var querystring = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPres AND idProducto = @idProd";
         using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
@@ -198,6 +199,22 @@ public class PresupuestosRepository
 
             command.Parameters.Add(new SqliteParameter("@idPres", idPres));
             command.Parameters.Add(new SqliteParameter("@idProd", idProd));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+    public void DeleteDetalleCompleto(int idPres)
+    {
+        var querystring = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPres";
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+
+            command.Parameters.Add(new SqliteParameter("@idPres", idPres));
 
             command.ExecuteNonQuery();
 

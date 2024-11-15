@@ -12,15 +12,4 @@ public class PresupuestoDetalle
         {
             producto = new Producto();
         }
-
-        public void asignarProd(int id)
-        {
-            var prodRep = new ProductosRepository();
-            producto = prodRep.GetProducto(id);
-        }
-
-        public void asignarProd(Producto prod)
-        {
-            producto = prod;
-        }
     }

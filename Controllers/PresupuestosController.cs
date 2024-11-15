@@ -27,7 +27,7 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult ListarDetalles(int id)
     {
-        return View(presRep.GetDetalles(id));
+        return View(presRep.GetDetallesById(id));
     }
 
     [HttpGet]
@@ -35,7 +35,7 @@ public class PresupuestosController : Controller
     {
         var cliRep = new ClienteRepository();
 
-        return View(new PresupuestoViewModel(cliRep.getClientes()));
+        return View(new PresupuestoViewModel(cliRep.GetAll()));
     }
 
     [HttpPost]
@@ -45,21 +45,21 @@ public class PresupuestosController : Controller
         presupuesto.FechaCreacion = DateTime.Now;
         presupuesto.Cliente.AsignarId(IdCliente);
         
-        presRep.create(presupuesto);
+        presRep.Create(presupuesto);
         return RedirectToAction("Listar");
     }
 
     [HttpGet]
     public IActionResult AsignarProducto(int id)
     {
-        var presupuesto = presRep.GetPresupuesto(id);
+        var presupuesto = presRep.GetById(id);
         if(presupuesto is null)
         {
             return RedirectToAction("Listar");
         } else 
         {
             var prodRep = new ProductosRepository();
-            var presupuestoVM = new ProductoAltaViewModel(id, prodRep.listarProductos());
+            var presupuestoVM = new ProductoAltaViewModel(id, prodRep.GetAll());
             return View(presupuestoVM);
         }
     
@@ -68,25 +68,25 @@ public class PresupuestosController : Controller
     [HttpPost]
     public IActionResult AsignarProducto(int idPresupuesto, int idProducto, int cantidad)
     {   
-        presRep.agregarDetalle(idPresupuesto, idProducto, cantidad);
+        presRep.AddDetalle(idPresupuesto, idProducto, cantidad);
         return RedirectToAction("Listar");
     }
 
     [HttpGet]
     public IActionResult Modificar(int id)
     {
-        var presupuesto = presRep.GetPresupuesto(id);
+        var presupuesto = presRep.GetById(id);
         return View(presupuesto);
     }
 
     [HttpPost]
     public IActionResult Modificar(Presupuesto presupuestoVista)
     {
-        var presupuesto = presRep.GetPresupuesto(presupuestoVista.Id);
+        var presupuesto = presRep.GetById(presupuestoVista.Id);
 
         presupuesto.Cliente.AsignarId(presupuestoVista.Cliente.IdCliente);
         presupuesto.FechaCreacion = presupuestoVista.FechaCreacion;
-        presRep.modificar(presupuesto);
+        presRep.Update(presupuesto);
 
         return RedirectToAction("Listar");
     }
@@ -94,14 +94,14 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult Eliminar(int id)
     {
-        var presupuesto = presRep.GetPresupuesto(id);
+        var presupuesto = presRep.GetById(id);
         return View(presupuesto);
     }
 
     [HttpPost]
     public IActionResult EliminarConfirm(int id)
     {
-        presRep.delete(id);
+        presRep.Delete(id);
         return RedirectToAction("Listar");
     }
     

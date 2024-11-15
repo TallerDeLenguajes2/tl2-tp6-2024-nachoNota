@@ -19,7 +19,7 @@ public class ClienteController : Controller
 
     public IActionResult Listar()
     {
-        return View(cliRep.getClientes());
+        return View(cliRep.GetAll());
     }
 
     [HttpGet]
@@ -41,7 +41,7 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult Modificar(int idCli)
     {
-        var cliente = cliRep.GetCliente(idCli);
+        var cliente = cliRep.GetById(idCli);
         return View(new ClienteViewModel(cliente));
     }
 
@@ -60,14 +60,14 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult Eliminar(int idCli)
     {
-        var producto = cliRep.GetCliente(idCli);
+        var producto = cliRep.GetById(idCli);
         return View(producto);
     }
 
     [HttpPost]
     public IActionResult EliminarConfirm(int idCli)
     {    
-        cliRep.delete(idCli);
+        cliRep.Delete(idCli);
         return RedirectToAction("Listar");
     }
 

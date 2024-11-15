@@ -19,7 +19,7 @@ public class ProductosController : Controller
 
     public IActionResult Listar()
     {
-        return View(prodRep.listarProductos());
+        return View(prodRep.GetAll());
     }
 
     [HttpGet]
@@ -41,7 +41,7 @@ public class ProductosController : Controller
     [HttpGet]
     public IActionResult Modificar(int idProd)
     {
-        var producto = prodRep.GetProducto(idProd);
+        var producto = prodRep.GetById(idProd);
         return View(new ProductoViewModel(producto));
     }
 
@@ -60,14 +60,14 @@ public class ProductosController : Controller
     [HttpGet]
     public IActionResult Eliminar(int idProd)
     {
-        var producto = prodRep.GetProducto(idProd);
+        var producto = prodRep.GetById(idProd);
         return View(producto);
     }
 
     [HttpPost]
     public IActionResult EliminarConfirm(int idProd)
     {    
-        prodRep.delete(idProd);
+        prodRep.Delete(idProd);
         return RedirectToAction("Listar");
     }
 

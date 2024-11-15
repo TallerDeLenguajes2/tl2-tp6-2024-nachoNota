@@ -4,7 +4,7 @@ public class ClienteRepository
 {
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
-    public List<Cliente> getClientes()
+    public List<Cliente> GetAll()
     {
         var querystring = @"SELECT * FROM Cliente";
         List<Cliente> clientes = new List<Cliente>();
@@ -33,7 +33,7 @@ public class ClienteRepository
         return clientes;
     }
 
-    public Cliente GetCliente(int id)
+    public Cliente GetById(int id)
     {
         var querystring = "SELECT * FROM Cliente WHERE idCliente = @id";
         var cliente = new Cliente();
@@ -102,7 +102,7 @@ public class ClienteRepository
         }
     }
 
-    public void delete(int id)
+    public void Delete(int id)
     {
         var querystring = "DELETE FROM Cliente WHERE idCliente = @id";
 
@@ -117,5 +117,4 @@ public class ClienteRepository
             connection.Close();
         }
     }
-
 }
