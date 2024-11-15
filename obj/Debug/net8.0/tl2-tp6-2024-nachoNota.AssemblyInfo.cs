@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl2-tp6-2024-nachoNota")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca394145df3289b6d7f9128ef6a137c925cf16dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f654d4305298cc50c091cec7c52e09c967e20b1f")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl2-tp6-2024-nachoNota")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl2-tp6-2024-nachoNota")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
