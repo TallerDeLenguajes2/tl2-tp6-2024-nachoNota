@@ -9,17 +9,17 @@ namespace tl2_tp6_2024_nachoNota.Controllers;
 public class ProductosController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private ProductosRepository prodRep;
+    private readonly IProductosRepository _prodRep;
 
-    public ProductosController(ILogger<HomeController> logger)
+    public ProductosController(ILogger<HomeController> logger, IProductosRepository _prodRep)
     {
         _logger = logger;
-        prodRep = new ProductosRepository();
+        this._prodRep = _prodRep;
     }
 
     public IActionResult Listar()
     {
-        return View(prodRep.GetAll());
+        return View(_prodRep.GetAll());
     }
 
     [HttpGet]
@@ -34,14 +34,14 @@ public class ProductosController : Controller
         if(!ModelState.IsValid) return RedirectToAction("Listar");
 
         var producto = new Producto(productoVM);
-        prodRep.Create(producto);
+        _prodRep.Create(producto);
         return RedirectToAction("Listar");
     } 
 
     [HttpGet]
     public IActionResult Modificar(int idProd)
     {
-        var producto = prodRep.GetById(idProd);
+        var producto = _prodRep.GetById(idProd);
         return View(new ProductoViewModel(producto));
     }
 
@@ -52,7 +52,7 @@ public class ProductosController : Controller
         if(!ModelState.IsValid) return RedirectToAction("Listar");
 
         var producto = new Producto(productoView);
-        prodRep.Update(producto);
+        _prodRep.Update(producto);
         
         return RedirectToAction("Listar");
     }
@@ -60,14 +60,14 @@ public class ProductosController : Controller
     [HttpGet]
     public IActionResult Eliminar(int idProd)
     {
-        var producto = prodRep.GetById(idProd);
+        var producto = _prodRep.GetById(idProd);
         return View(producto);
     }
 
     [HttpPost]
     public IActionResult EliminarConfirm(int idProd)
     {    
-        prodRep.Delete(idProd);
+        _prodRep.Delete(idProd);
         return RedirectToAction("Listar");
     }
 

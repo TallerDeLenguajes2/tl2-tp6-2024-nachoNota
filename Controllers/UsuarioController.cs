@@ -9,16 +9,16 @@ namespace tl2_tp6_2024_nachoNota.Controllers;
 public class UsuarioController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private IUsuarioRepository _usuRep;
+    private readonly IUsuarioRepository _usuRep;
 
-    public UsuarioController(ILogger<HomeController> logger, UsuarioRepository usuRep)
+    public UsuarioController(ILogger<HomeController> logger, IUsuarioRepository usuRep)
     {
         _logger = logger;
         _usuRep = usuRep;
     }
 
     public IActionResult Index(){
-        return View(new Usuariovm());
+        return View(new UsuarioViewModel());
     }
 
     

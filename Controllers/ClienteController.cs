@@ -9,17 +9,17 @@ namespace tl2_tp6_2024_nachoNota.Controllers;
 public class ClienteController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private ClienteRepository cliRep;
+    private IClienteRepository _cliRep;
 
-    public ClienteController(ILogger<HomeController> logger)
+    public ClienteController(ILogger<HomeController> logger, IClienteRepository cliRep)
     {
         _logger = logger;
-        cliRep = new ClienteRepository();
+        _cliRep = cliRep;
     }
 
     public IActionResult Listar()
     {
-        return View(cliRep.GetAll());
+        return View(_cliRep.GetAll());
     }
 
     [HttpGet]
@@ -34,14 +34,14 @@ public class ClienteController : Controller
         if(!ModelState.IsValid) return RedirectToAction("Listar");
 
         var cliente = new Cliente(clienteVM); 
-        cliRep.Create(cliente);
+        _cliRep.Create(cliente);
         return RedirectToAction("Listar");
     } 
 
     [HttpGet]
     public IActionResult Modificar(int idCli)
     {
-        var cliente = cliRep.GetById(idCli);
+        var cliente = _cliRep.GetById(idCli);
         return View(new ClienteViewModel(cliente));
     }
 
@@ -52,7 +52,7 @@ public class ClienteController : Controller
         if(!ModelState.IsValid) return RedirectToAction("Listar");
 
         var cliente = new Cliente(clienteView);
-        cliRep.Update(cliente);
+        _cliRep.Update(cliente);
 
         return RedirectToAction("Listar");
     }
@@ -60,14 +60,14 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult Eliminar(int idCli)
     {
-        var producto = cliRep.GetById(idCli);
+        var producto = _cliRep.GetById(idCli);
         return View(producto);
     }
 
     [HttpPost]
     public IActionResult EliminarConfirm(int idCli)
     {    
-        cliRep.Delete(idCli);
+        _cliRep.Delete(idCli);
         return RedirectToAction("Listar");
     }
 
