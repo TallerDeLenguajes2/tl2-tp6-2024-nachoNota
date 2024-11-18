@@ -5,8 +5,8 @@
 @model List<Producto>
 @using Microsoft.AspNetCore.Http
 
-@{var rol = ViewData["RolUsuario"].ToString();}
-@if(rol is not null && rol == Rol.Administrador.ToString())
+@{var rol = ViewData["RolUsuario"]?.ToString();}
+@if(!string.IsNullOrEmpty(rol) && rol == Rol.Administrador.ToString())
 {
     <a asp-action="Crear" class="text-decoration-none">Crear nuevo producto</a>
 }
@@ -26,7 +26,7 @@
             <td>@producto.Id</td>
             <td>@producto.Descripcion</td>
             <td>@producto.Precio</td>
-        @if(rol is not null && rol == Rol.Administrador.ToString()){
+        @if(!string.IsNullOrEmpty(rol) && rol == Rol.Administrador.ToString()){
             <td><a asp-action="Modificar" asp-route-idProd="@producto.Id" class="text-decoration-none">Modificar</a></td>
             <td><a asp-action="Eliminar" asp-route-idProd="@producto.Id" class="text-decoration-none">Eliminar</a></td>
         }
