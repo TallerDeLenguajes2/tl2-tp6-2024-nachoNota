@@ -19,16 +19,19 @@ public class ProductosController : Controller
 
     public IActionResult Listar()
     {
+        ViewData["RolUsuario"] = HttpContext.Session.GetString("NivelAcceso"); // paso la info del rol a la vista
         return View(_prodRep.GetAll());
     }
 
     [HttpGet]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult Crear()
     {
         return View(new ProductoViewModel());
     }
 
     [HttpPost]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult Crear(ProductoViewModel productoVM)
     {
         if(!ModelState.IsValid) return RedirectToAction("Listar");
@@ -39,6 +42,7 @@ public class ProductosController : Controller
     } 
 
     [HttpGet]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult Modificar(int idProd)
     {
         var producto = _prodRep.GetById(idProd);
@@ -46,6 +50,7 @@ public class ProductosController : Controller
     }
 
     [HttpPost]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult Modificar(ProductoViewModel productoView)
     {
 
@@ -58,6 +63,7 @@ public class ProductosController : Controller
     }
 
     [HttpGet]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult Eliminar(int idProd)
     {
         var producto = _prodRep.GetById(idProd);
@@ -65,6 +71,7 @@ public class ProductosController : Controller
     }
 
     [HttpPost]
+    [RolRequerido(Rol.Administrador)]
     public IActionResult EliminarConfirm(int idProd)
     {    
         _prodRep.Delete(idProd);

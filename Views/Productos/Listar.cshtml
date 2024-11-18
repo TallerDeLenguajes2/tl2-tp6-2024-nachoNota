@@ -3,8 +3,13 @@
 }
 
 @model List<Producto>
+@using Microsoft.AspNetCore.Http
 
-<a asp-action="Crear" class="text-decoration-none">Crear nuevo producto</a>
+@{var rol = ViewData["RolUsuario"].ToString();}
+@if(rol is not null && rol == Rol.Administrador.ToString())
+{
+    <a asp-action="Crear" class="text-decoration-none">Crear nuevo producto</a>
+}
 
 <table class="table mt-3 table-hover">
     <thead>
@@ -16,16 +21,16 @@
     </thead>
     <tbody>
         @foreach(Producto producto in Model)
-{
-
+        {
         <tr>
             <td>@producto.Id</td>
             <td>@producto.Descripcion</td>
             <td>@producto.Precio</td>
+        @if(rol is not null && rol == Rol.Administrador.ToString()){
             <td><a asp-action="Modificar" asp-route-idProd="@producto.Id" class="text-decoration-none">Modificar</a></td>
             <td><a asp-action="Eliminar" asp-route-idProd="@producto.Id" class="text-decoration-none">Eliminar</a></td>
+        }
         </tr>
-
-}
+        }
     </tbody>
 </table>
