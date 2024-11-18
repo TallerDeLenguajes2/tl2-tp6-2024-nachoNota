@@ -13,7 +13,6 @@
         "packagesPath": "C:\\Users\\Ignacio\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\Ignacio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -41,12 +40,17 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.Data.SQLite": {
               "target": "Package",
               "version": "[8.0.10, )"

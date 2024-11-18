@@ -2,28 +2,35 @@ using Microsoft.Data.Sqlite;
 
 public class UsuarioRepository : IUsuarioRepository
 {
-    public List<Usuario> GetAll()
+    private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
+    public Usuario? GetUsuario(string nomUsuario, string contrasena)
     {
-        throw new NotImplementedException();
-    }
+        string querystring = "SELECT * FROM Usuario WHERE usuario = @usu and contrasena = @contr";
+        var usuario = new Usuario();
 
-    public Producto GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
+        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(querystring, connection);
+            command.Parameters.Add(new SqliteParameter("@usu", nomUsuario));
+            command.Parameters.Add(new SqliteParameter("@contr", contrasena));
 
-    public void Create(Producto nuevoProducto)
-    {
-        throw new NotImplementedException();
-    }
+            using(SqliteDataReader reader = command.ExecuteReader())
+            {
+                if(!reader.HasRows) return null;
 
-    public void Update(Producto producto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(int id)
-    {
-        throw new NotImplementedException();
+                while(reader.Read())
+                {
+                    usuario.Nombre = reader["nombre"].ToString();
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.NombreUsuario = reader["usuario"].ToString();
+                    usuario.Contrasena = reader["contrasena"].ToString();
+                    int valorRol = Convert.ToInt32(reader["rol"]);
+                    usuario.Rol = (Rol)valorRol;
+                }
+            }
+            connection.Close();
+        }
+        return usuario;
     }
 }

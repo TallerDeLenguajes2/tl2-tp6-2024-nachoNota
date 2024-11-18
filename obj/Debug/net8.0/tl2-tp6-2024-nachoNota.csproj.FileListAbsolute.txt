@@ -172,3 +172,4 @@ C:\Users\Alumno\Documents\tl2-tp6-2024-nachoNota\obj\Debug\net8.0\ref\tl2-tp6-20
 C:\Users\Ignacio\Documents\NACHO\facet\Taller2\tl2-tp6-2024-nachoNota\bin\Debug\net8.0\tl2-tp6-2024-nachoNota.staticwebassets.endpoints.json
 C:\Users\Ignacio\Documents\NACHO\facet\Taller2\tl2-tp6-2024-nachoNota\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\Ignacio\Documents\NACHO\facet\Taller2\tl2-tp6-2024-nachoNota\obj\Debug\net8.0\staticwebassets\msbuild.tl2-tp6-2024-nachoNota.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Ignacio\Documents\NACHO\facet\Taller2\tl2-tp6-2024-nachoNota\bin\Debug\net8.0\System.Security.Permissions.dll
