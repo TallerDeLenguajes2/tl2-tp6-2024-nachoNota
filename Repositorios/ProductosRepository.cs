@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 public class ProductosRepository : IProductosRepository{
     private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
 
-    public List<Producto> GetAll()
+    public IEnumerable<Producto> GetAll()
     {
         var querystring = @"SELECT * FROM Productos";
         List<Producto> productos = new List<Producto>();

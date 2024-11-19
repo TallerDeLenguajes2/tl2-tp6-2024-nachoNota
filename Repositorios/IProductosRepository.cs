@@ -1,6 +1,6 @@
 public interface IProductosRepository
 {
-    List<Producto> GetAll();
+    IEnumerable<Producto> GetAll();
     Producto GetById(int id);
     public void Create(Producto nuevoProducto);
     public void Update(Producto producto);

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Productos";
 }
 
-@model List<Producto>
+@model IEnumerable<Producto>
 @using Microsoft.AspNetCore.Http
 
 @{var rol = ViewData["RolUsuario"]?.ToString();}
