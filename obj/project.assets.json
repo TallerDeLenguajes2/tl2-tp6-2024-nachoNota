@@ -1392,7 +1392,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ignacio\\.nuget\\packages\\": {}
+    "C:\\Users\\Ignacio\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
@@ -1403,8 +1404,12 @@
       "packagesPath": "C:\\Users\\Ignacio\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\Ignacio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1412,7 +1417,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1457,24 +1461,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1492,7 +1478,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Security.Cryptography.Xml\" 4.5.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-vh55-786g-wjwj",
+      "message": "Package 'System.Security.Cryptography.Xml' 4.5.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-vh55-786g-wjwj",
       "libraryId": "System.Security.Cryptography.Xml",
       "targetGraphs": [
         "net8.0"
@@ -1502,7 +1488,7 @@
       "code": "NU1904",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Text.Encodings.Web\" 4.5.0 tiene una vulnerabilidad de gravedad crítica conocida, https://github.com/advisories/GHSA-ghhp-997w-qr28",
+      "message": "Package 'System.Text.Encodings.Web' 4.5.0 has a known critical severity vulnerability, https://github.com/advisories/GHSA-ghhp-997w-qr28",
       "libraryId": "System.Text.Encodings.Web",
       "targetGraphs": [
         "net8.0"

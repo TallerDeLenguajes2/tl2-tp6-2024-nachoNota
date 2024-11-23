@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "S3WqWOZ5P9s=",
+  "dgSpecHash": "5V8FwKTV8As=",
   "success": true,
   "projectFilePath": "C:\\Users\\Ignacio\\Documents\\NACHO\\facet\\Taller2\\tl2-tp6-2024-nachoNota\\tl2-tp6-2024-nachoNota.csproj",
   "expectedPackageFiles": [
@@ -37,18 +37,14 @@
     "C:\\Users\\Ignacio\\.nuget\\packages\\system.security.cryptography.xml\\4.5.0\\system.security.cryptography.xml.4.5.0.nupkg.sha512",
     "C:\\Users\\Ignacio\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
     "C:\\Users\\Ignacio\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512",
-    "C:\\Users\\Ignacio\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
-    "C:\\Users\\Ignacio\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.11\\microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512",
-    "C:\\Users\\Ignacio\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.11\\microsoft.netcore.app.host.win-x64.8.0.11.nupkg.sha512",
-    "C:\\Users\\Ignacio\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.11\\microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
-    "C:\\Users\\Ignacio\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.11\\microsoft.windowsdesktop.app.ref.8.0.11.nupkg.sha512"
+    "C:\\Users\\Ignacio\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Security.Cryptography.Xml\" 4.5.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-vh55-786g-wjwj",
+      "message": "Package 'System.Security.Cryptography.Xml' 4.5.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-vh55-786g-wjwj",
       "libraryId": "System.Security.Cryptography.Xml",
       "targetGraphs": [
         "net8.0"
@@ -58,7 +54,7 @@
       "code": "NU1904",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Text.Encodings.Web\" 4.5.0 tiene una vulnerabilidad de gravedad crítica conocida, https://github.com/advisories/GHSA-ghhp-997w-qr28",
+      "message": "Package 'System.Text.Encodings.Web' 4.5.0 has a known critical severity vulnerability, https://github.com/advisories/GHSA-ghhp-997w-qr28",
       "libraryId": "System.Text.Encodings.Web",
       "targetGraphs": [
         "net8.0"

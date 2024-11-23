@@ -2,13 +2,16 @@ using Microsoft.Data.Sqlite;
 
 public class UsuarioRepository : IUsuarioRepository
 {
-    private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
+    private readonly string _connectionString;
+
+    public UsuarioRepository(string connectionString) {  _connectionString = connectionString; }
+
     public Usuario? GetUsuario(string nomUsuario, string contrasena)
     {
         string querystring = "SELECT * FROM Usuario WHERE usuario = @usu and contrasena = @contr";
         var usuario = new Usuario();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);

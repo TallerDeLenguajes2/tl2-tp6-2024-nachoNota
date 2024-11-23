@@ -5,13 +5,15 @@ using SQLitePCL;
 
 public class PresupuestosRepository : IPresupuestosRepository
 {
-    private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
+    private readonly string _connectionString;
+
+    public PresupuestosRepository(string connectionString) { _connectionString = connectionString; }
 
     public void Create(Presupuesto presupuesto)
     {
         var querystring = "INSERT INTO Presupuestos (idCliente, FechaCreacion) VALUES (@id, @fecha)";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -30,7 +32,7 @@ public class PresupuestosRepository : IPresupuestosRepository
         var querystring = "SELECT * FROM Presupuestos JOIN Cliente USING(idCliente)";
         var listaPresupuestos = new List<Presupuesto>();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -64,7 +66,7 @@ public class PresupuestosRepository : IPresupuestosRepository
         var querystring = "SELECT idProducto, Descripcion, Precio, Cantidad FROM PresupuestosDetalle JOIN Productos USING(idProducto) WHERE idPresupuesto = @id";
         var detalles = new List<PresupuestoDetalle>();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -91,7 +93,7 @@ public class PresupuestosRepository : IPresupuestosRepository
         string querystring = "SELECT idPresupuesto, idCliente, Nombre, FechaCreacion FROM Presupuestos JOIN Cliente USING(idCliente) WHERE idPresupuesto = @id";
         var presupuesto = new Presupuesto();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -115,7 +117,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     public void Update(Presupuesto presupuesto)
     {
         string querystring = "UPDATE Presupuestos SET idCliente = @idCli, FechaCreacion = @fecha WHERE idPresupuesto = @id";
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -134,7 +136,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     {
         var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -154,7 +156,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     {
         var querystring = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @Cantidad)";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -175,7 +177,7 @@ public class PresupuestosRepository : IPresupuestosRepository
         DeleteDetalleCompleto(id);
         var querystring = "DELETE FROM Presupuestos WHERE idPresupuesto = @idPresupuesto";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -191,7 +193,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     public void DeleteDetalle(int idPres, int idProd)
     {
         var querystring = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPres AND idProducto = @idProd";
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -208,7 +210,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     public void DeleteDetalleCompleto(int idPres)
     {
         var querystring = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPres";
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 

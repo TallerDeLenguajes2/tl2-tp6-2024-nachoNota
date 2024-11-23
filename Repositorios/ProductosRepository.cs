@@ -1,14 +1,17 @@
 using Microsoft.Data.Sqlite;
 
 public class ProductosRepository : IProductosRepository{
-    private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
+
+    private readonly string _connectionString;
+
+    public ProductosRepository(string connectionString) { _connectionString = connectionString; }
 
     public IEnumerable<Producto> GetAll()
     {
         var querystring = @"SELECT * FROM Productos";
         List<Producto> productos = new List<Producto>();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -35,7 +38,7 @@ public class ProductosRepository : IProductosRepository{
         var querystring = "SELECT * FROM Productos WHERE idProducto = @idProducto";
         var producto = new Producto();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -63,7 +66,7 @@ public class ProductosRepository : IProductosRepository{
     {
         var querystring = @"INSERT INTO Productos (Descripcion, Precio) VALUES (@Descripcion, @Precio)";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);   
@@ -80,7 +83,7 @@ public class ProductosRepository : IProductosRepository{
     {
         var querystring = @"UPDATE Productos SET Descripcion = @Descripcion, Precio = @Precio WHERE idProducto = @idProducto";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -100,7 +103,7 @@ public class ProductosRepository : IProductosRepository{
         DeleteDetalleCompleto(id);
         var querystring = "DELETE FROM Productos WHERE idProducto = @idProducto";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion)){
+        using(SqliteConnection connection = new SqliteConnection(_connectionString)){
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
@@ -115,7 +118,7 @@ public class ProductosRepository : IProductosRepository{
     public void DeleteDetalleCompleto(int idProd)
     {
         var querystring = "DELETE FROM PresupuestosDetalle WHERE idProducto = @idProd";
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 

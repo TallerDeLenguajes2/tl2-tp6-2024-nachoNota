@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.RateLimiting;
@@ -11,11 +12,16 @@ public class PresupuestosController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IPresupuestosRepository _presRep;
+    private readonly IClienteRepository _cliRep;
+    private readonly IProductosRepository _prodRep;
 
-    public PresupuestosController(ILogger<HomeController> logger, IPresupuestosRepository presRep)
+    public PresupuestosController(ILogger<HomeController> logger, IPresupuestosRepository presRep,
+        IClienteRepository cliRep, IProductosRepository prodRep)
     {
         _logger = logger;
         _presRep = presRep;
+        _cliRep = cliRep;
+        _prodRep = prodRep;
     }
 
     [HttpGet]
@@ -32,10 +38,8 @@ public class PresupuestosController : Controller
 
     [HttpGet]
     public IActionResult Crear()
-    {
-        var cliRep = new ClienteRepository();
-
-        return View(new PresupuestoViewModel(cliRep.GetAll()));
+    { 
+        return View(new PresupuestoViewModel(_cliRep.GetAll()));
     }
 
     [HttpPost]
@@ -58,8 +62,7 @@ public class PresupuestosController : Controller
             return RedirectToAction("Listar");
         } else 
         {
-            var prodRep = new ProductosRepository();
-            var presupuestoVM = new ProductoAltaViewModel(id, prodRep.GetAll());
+            var presupuestoVM = new ProductoAltaViewModel(id, _prodRep.GetAll());
             return View(presupuestoVM);
         }
     

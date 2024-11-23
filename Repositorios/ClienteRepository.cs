@@ -2,14 +2,16 @@ using Microsoft.Data.Sqlite;
 
 public class ClienteRepository : IClienteRepository
 {
-    private const string cadenaConexion = "Data source=db/Tienda.db;Cache=Shared";
+    private readonly string _connectionString;
+
+    public ClienteRepository(string connectionString) { _connectionString = connectionString; }
 
     public List<Cliente> GetAll()
     {
         var querystring = @"SELECT * FROM Cliente";
         List<Cliente> clientes = new List<Cliente>();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -38,7 +40,7 @@ public class ClienteRepository : IClienteRepository
         var querystring = "SELECT * FROM Cliente WHERE idCliente = @id";
         var cliente = new Cliente();
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -67,7 +69,7 @@ public class ClienteRepository : IClienteRepository
     {
         var querystring = @"INSERT INTO Cliente (Nombre, Email, Telefono) VALUES (@nom, @email, @tel)";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);   
@@ -85,7 +87,7 @@ public class ClienteRepository : IClienteRepository
     {
         var querystring = @"UPDATE Cliente SET Nombre = @nom, Email = @email, Telefono = @tel WHERE idCliente = @id";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        using(SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
@@ -106,7 +108,7 @@ public class ClienteRepository : IClienteRepository
     {
         var querystring = "DELETE FROM Cliente WHERE idCliente = @id";
 
-        using(SqliteConnection connection = new SqliteConnection(cadenaConexion)){
+        using(SqliteConnection connection = new SqliteConnection(_connectionString)){
             connection.Open();
             SqliteCommand command = new SqliteCommand(querystring, connection);
 
