@@ -12,16 +12,11 @@ public class PresupuestosController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IPresupuestosRepository _presRep;
-    private readonly IClienteRepository _cliRep;
-    private readonly IProductosRepository _prodRep;
 
-    public PresupuestosController(ILogger<HomeController> logger, IPresupuestosRepository presRep,
-        IClienteRepository cliRep, IProductosRepository prodRep)
+    public PresupuestosController(ILogger<HomeController> logger, IPresupuestosRepository presRep)
     {
         _logger = logger;
         _presRep = presRep;
-        _cliRep = cliRep;
-        _prodRep = prodRep;
     }
 
     [HttpGet]
@@ -37,9 +32,9 @@ public class PresupuestosController : Controller
     }
 
     [HttpGet]
-    public IActionResult Crear()
+    public IActionResult Crear([FromServices] IClienteRepository cliRep) //inyecto directamente en el metodo
     { 
-        return View(new PresupuestoViewModel(_cliRep.GetAll()));
+        return View(new PresupuestoViewModel(cliRep.GetAll()));
     }
 
     [HttpPost]
@@ -54,7 +49,7 @@ public class PresupuestosController : Controller
     }
 
     [HttpGet]
-    public IActionResult AsignarProducto(int id)
+    public IActionResult AsignarProducto(int id, [FromServices] IProductosRepository prodRep)
     {
         var presupuesto = _presRep.GetById(id);
         if(presupuesto is null)
@@ -62,7 +57,7 @@ public class PresupuestosController : Controller
             return RedirectToAction("Listar");
         } else 
         {
-            var presupuestoVM = new ProductoAltaViewModel(id, _prodRep.GetAll());
+            var presupuestoVM = new ProductoAltaViewModel(id, prodRep.GetAll());
             return View(presupuestoVM);
         }
     
